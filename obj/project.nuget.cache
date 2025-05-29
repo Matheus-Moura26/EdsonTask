@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "6vpc7xfrg+k=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Acdev\\Desktop\\DEV\\Repositórios\\Edson\\FinanceManager\\FinanceManager.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Acdev\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.5\\microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
+    "C:\\Users\\Acdev\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
