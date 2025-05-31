@@ -1,5 +1,5 @@
 ﻿
-namespace FinanceManager.Models
+namespace PersonManager.Models
 {
     public class Person
     {

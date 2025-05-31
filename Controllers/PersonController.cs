@@ -1,28 +1,28 @@
 ﻿
 
 using Microsoft.AspNetCore.Mvc;
-using FinanceManager.Models;
+using PersonManager.Models;
 
-namespace FinanceManager.Controllers
-{
+namespace Controller.Persons;
+
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class PersonController : ControllerBase
     {
-        private static List<Person> _persons = new List<Person>();
-        
+        public static List<Person> _persons = new List<Person>();
+
         [HttpGet]
-        private ActionResult<IEnumerable<Person>> GetAll()
+        public ActionResult<IEnumerable<Person>> GetAll()
         {
             return Ok(_persons);
         }
 
         [HttpPost]
-        private ActionResult<Person> Create([FromBody] Person person)
+        public ActionResult<Person> Create([FromBody] Person person)
         {
             person.PersonId = _persons.Count + 1;
             _persons.Add(person);
-            
+
             return CreatedAtAction(nameof(GetAll), new { id = person.PersonId }, person);
         }
 
@@ -39,8 +39,6 @@ namespace FinanceManager.Controllers
             _persons.Remove(person);
             return Ok("Pessoa deletada com sucesso");
         }
-        
-        
-                
     }
-}
+
+    
