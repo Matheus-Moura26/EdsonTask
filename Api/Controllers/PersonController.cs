@@ -1,27 +1,45 @@
 ﻿
 
+using FinanceManager.Application.AppService;
+using FinanceManager.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using PersonManager.Models;
 
-namespace Controller.Persons;
+
+namespace Api.Controller.Persons;
 
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class PersonController : ControllerBase
+    public class PersonController(PersonAppService personAppService) : ControllerBase
     {
-        public static List<Person> _persons = new List<Person>();
+
+    [HttpGet]
+    public async Task<ActionResult<Person>> Get(int id)
+    {
+        var person = await personAppService.Get(id);
+
+        if (person == null)
+        {
+            return NoContent();
+        }
+        return Ok(person);
+    }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Person>> GetAll()
+        public async Task<ActionResult<List<Person>>> GetAll()
         {
-            return Ok(_persons);
+        var people = await personAppService.GetAll();
+
+        if (people == null)
+        {
+            return NoContent();
         }
+        return Ok(people);
+    }
 
         [HttpPost]
         public ActionResult<Person> Create([FromBody] Person person)
         {
-            person.PersonId = _persons.Count + 1;
-            _persons.Add(person);
+           var result = personAppService.Create(person)
 
             return CreatedAtAction(nameof(GetAll), new { id = person.PersonId }, person);
         }

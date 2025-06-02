@@ -1,20 +1,19 @@
 
 
 using Microsoft.AspNetCore.Mvc;
-using FinanceManager.Models;
+using FinanceManager.Domain.Entities;
 
 
-namespace Controller.financial;
+namespace Api.Controller.financial;
 
 
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class FinancialController : ControllerBase
 {
-    private List<BankAccount> _bankAccount = new List<BankAccount>();
-    private List<Transaction> _transaction = new List<Transaction>();
-    private List<BankingMethod> _BankingMethod = new List<BankingMethod>();
+   
 
+   
     [HttpPost]
     public ActionResult<BankAccount> CreateBankAccount( BankAccount bankAccount)
     {
