@@ -17,8 +17,8 @@ public class FinancialController : ControllerBase
     [HttpPost]
     public ActionResult<BankAccount> CreateBankAccount( BankAccount bankAccount)
     {
-        bankAccount.BankAccountId = _bankAccount.Count + 1;
-        _bankAccount.Add(bankAccount);
+        bankAccount.BankAccountId = bankAccount.BankAccountId + 1;
+        bankAccount.Add(bankAccount);
         return Created();
     }
 

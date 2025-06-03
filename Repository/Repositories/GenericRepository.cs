@@ -22,12 +22,6 @@ namespace FinanceManager.Repository.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task AddAsync(T entity)
-        {
-            await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
-        }
-
         public async Task UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
@@ -37,6 +31,12 @@ namespace FinanceManager.Repository.Repositories
         public async Task DeleteAsync(T entity)
         {
             _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+        
+        public async Task AddAsync(T entity)
+        {
+            _dbSet.Add(entity);
             await _context.SaveChangesAsync();
         }
     }
