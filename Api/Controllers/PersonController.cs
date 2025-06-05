@@ -40,9 +40,9 @@ namespace Api.Controller.Persons;
 
         
         [HttpPost]
-        public ActionResult<Person> Create([FromBody] Person person)
+        public async Task<ActionResult<Person>> Create([FromBody] Person person)
         {
-            var result = personAppService.Create(person);
+            var result = await personAppService.Create(person);
 
             return CreatedAtAction(nameof(GetAll), new { id = person.PersonId }, person);
         }
