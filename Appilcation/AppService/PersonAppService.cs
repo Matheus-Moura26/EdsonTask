@@ -21,11 +21,11 @@ public class PersonAppService(PersonRepository personRepository)
         return await personRepository.GetAllAsync();
     }
 
-    public async Task<List<Person>> Delete(int id)
+    public async Task<Person?> Delete(int id)
     {
         var person = await personRepository.GetByIdAsync(id);
         await personRepository.DeleteAsync(person);
-        return await personRepository.GetAllAsync();
+        return person;
     }
 
     public async Task<Person> Create(Person person)
