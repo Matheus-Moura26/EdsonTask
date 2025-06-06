@@ -15,28 +15,31 @@ namespace Api.Controllers.BankingMethods;
 public class FinancialController(BankingMethodAppService bankingMethodAppService) : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult<BankingMethod>> CreateBankingMethod(BankingMethod bankingMethod)
+    public async Task<ActionResult<BankingMethod?>> CreateBankingMethod(BankingMethod bankingMethod)
     {
         var result = await bankingMethodAppService.Create(bankingMethod);
         return result;
     }
 
     [HttpGet]
-    public ActionResult<BankingMethod> GetBakingMethodById(int id)
+    public async Task<ActionResult<BankingMethod?>> GetBakingMethodById(int id)
     {
-        return bankingMethodAppService.Get(id);
+        return await bankingMethodAppService.Get(id);
     }
 
-    
 
+    [HttpPut]
+    public async Task<ActionResult<BankingMethod?>> UpdateBankingMethod(BankingMethod bankingMethod)
+    {
+        var result = await bankingMethodAppService.Update(bankingMethod);
+        return Ok(bankingMethod);      
+    }
 
 
     [HttpDelete]
-    public ActionResult<BankingMethod> DeleteBankingMethod(int id)
+    public async Task<ActionResult<BankingMethod?>> DeleteBankingMethod(int id)
     {
-        var bankingMethod = _BankingMethod.FirstOrDefault(b => b.BankingMethodId == id);
-        if (bankingMethod == null)
-            return NotFound("BankingMethod Não encontrado");
-        return Ok("BankingMethod Excluído");
+        await bankingMethodAppService.Delete(id);
+        return Ok();
     }
 }

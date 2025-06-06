@@ -28,6 +28,11 @@ public class BankingMethodAppService(BankingMethodRepository bankingMethodReposi
         return result;
     }
 
-    
+    public async Task<BankingMethod?> Update(BankingMethod bankingMethod)
+    {
+        await bankingMethodRepository.UpdateAsync(bankingMethod);
+        return bankingMethod;
+    }
+
 
 }

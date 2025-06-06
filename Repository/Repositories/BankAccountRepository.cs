@@ -1,5 +1,5 @@
 using FinanceManager.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameWork;
 
 namespace FinanceManager.Repository.Repositories;
 
