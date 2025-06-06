@@ -21,6 +21,13 @@ public class BankingMethodAppService(BankingMethodRepository bankingMethodReposi
         return result;
     }
 
+    public async Task<BankingMethod?> Delete(int id)
+    {
+        var result = await bankingMethodRepository.GetByIdAsync(id);
+        await bankingMethodRepository.DeleteAsync(result);
+        return result;
+    }
+
     
 
 }

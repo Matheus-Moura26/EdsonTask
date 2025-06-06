@@ -6,7 +6,7 @@ using FinanceManager.Repository.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace Api.Controller.Persons;
+namespace Api.Controllers.Persons;
 
     [ApiController]
     [Route("api/[controller]/[action]")]

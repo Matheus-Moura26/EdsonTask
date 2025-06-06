@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using System.Runtime.CompilerServices;
 
 
-namespace FinanceManager.Api.Controllers;
+namespace FinanceManager.Api.Controllers.BankAccounts;
 
 [ApiController]
 [Route("api/[controller]/[action]")]

@@ -7,33 +7,24 @@ using System.Threading.Tasks;
 using FinanceManager.Appilcation.AppService;
 
 
-namespace Api.Controller.financial;
+namespace Api.Controllers.BankingMethods;
 
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class FinancialController(BankingMethod bankingMethod) : ControllerBase
+public class FinancialController(BankingMethodAppService bankingMethodAppService) : ControllerBase
 {
     [HttpPost]
     public async Task<ActionResult<BankingMethod>> CreateBankingMethod(BankingMethod bankingMethod)
     {
-        var result = await BankingMethodAppService.Create(bankingMethod);
+        var result = await bankingMethodAppService.Create(bankingMethod);
         return result;
     }
-
-
-
-    
 
     [HttpGet]
     public ActionResult<BankingMethod> GetBakingMethodById(int id)
     {
-        var bankingMethod = _BankingMethod.FirstOrDefault(b => b.BankingMethodId == id);
-
-        if (bankingMethod == null)
-            return NotFound("BankingMethod não encontrado");
-
-        return Ok(bankingMethod);
+        return bankingMethodAppService.Get(id);
     }
 
     
