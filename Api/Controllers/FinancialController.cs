@@ -3,6 +3,8 @@
 using Microsoft.AspNetCore.Mvc;
 using FinanceManager.Domain.Entities;
 using FinanceManager.Application.AppService;
+using System.Threading.Tasks;
+using FinanceManager.Appilcation.AppService;
 
 
 namespace Api.Controller.financial;
@@ -10,21 +12,13 @@ namespace Api.Controller.financial;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class FinancialController(PersonAppService personAppService) : ControllerBase
+public class FinancialController(BankingMethod bankingMethod) : ControllerBase
 {
-   
-
-   
-    
-
-    
-
     [HttpPost]
-    public ActionResult<BankingMethod> CreateBankingMethod( BankingMethod bankingMethod)
+    public async Task<ActionResult<BankingMethod>> CreateBankingMethod(BankingMethod bankingMethod)
     {
-        bankingMethod.BankingMethodId = _BankingMethod.Count + 1;
-        _BankingMethod.Add(bankingMethod);
-        return Created();
+        var result = await BankingMethodAppService.Create(bankingMethod);
+        return result;
     }
 
 
