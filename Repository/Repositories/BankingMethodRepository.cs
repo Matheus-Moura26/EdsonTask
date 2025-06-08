@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Repository.Repositories;
 
-public class BankingMethodRepository(DbContext context) : GenericRepository<BankingMethod>(context)
+public class BankingMethodRepository(MyDbContext context) : GenericRepository<BankingMethod>(context)
 {
     
 }

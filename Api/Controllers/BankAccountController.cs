@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using FinanceManager.Application.AppService;
 using Microsoft.AspNetCore.Mvc;
 using FinanceManager.Domain.Entities;
-using FinanceManager.Appilcation.AppService;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Runtime.CompilerServices;
 
@@ -21,25 +20,36 @@ public class BankAccountController(BankAccountAppService bankAccountAppService) 
     public async Task<ActionResult<BankAccount>> CreateBankAccount(BankAccount bankAccount)
     {
         var result = await bankAccountAppService.Create(bankAccount);
+        if (result == null)
+            return NotFound();
         return Ok(result);
     }
 
     [HttpGet]
     public async Task<ActionResult<BankAccount>> GetBankAccountById(int id)
     {
-        return Ok(await bankAccountAppService.Get(id));
+        var result = await bankAccountAppService.Get(id);
+        if (result == null)
+            return NotFound();
+        return Ok(result);
     }
 
     [HttpDelete]
     public async Task<ActionResult<BankAccount>> DeleteBankAccount(int id)
     {
-        return Ok(await bankAccountAppService.Delete(id));
+
+        var result = await bankAccountAppService.Delete(id);
+        if (result == null)
+            return NotFound();
+        return Ok(result);
     }
 
     [HttpPut]
     public async Task<ActionResult<BankAccount>> UpdateBankAccount(BankAccount bankAccount)
     {
         var result = await bankAccountAppService.Update(bankAccount.BankAccountId, bankAccount);
+        if (result == null)
+            return NotFound();
         return Ok(result);
     }
 

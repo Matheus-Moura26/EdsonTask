@@ -6,7 +6,7 @@ using FinanceManager.Repository.Repositories;
 using FinanceManager.Domain.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace FinanceManager.Appilcation.AppService;
+namespace FinanceManager.Application.AppService;
 
 public class BankAccountAppService(BankAccountRepository bankAccountRepository)
 {

@@ -22,28 +22,30 @@ public class TransactionController(TransactionAppService transactionAppService) 
     }
 
     [HttpPost]
-    public async Task<ActionResult<Transaction>> CreateTransaction([FromBody] Transaction transaction)
+    public async Task<ActionResult<Transaction>> CreateTransaction( Transaction transaction)
     {
         var result = await transactionAppService.Create(transaction);
-        return CreatedAtAction(
-            nameof(GetTransactionById),
-            new { id = result.TransactionId },
-            result
-        );
+
+        return Ok(result);
     }
 
 
     [HttpDelete]
     public async Task<ActionResult> DeleteTransaction(int id)
     {
-        var result = await transactionAppService.Delete(id);
-        return Ok("Pessoa Deletada com Sucesso");
+        var deletarPessoa = await transactionAppService.Delete(id);
+        var pessoaDeletada = await transactionAppService.Get(id);
+        if (pessoaDeletada == null)
+            return Ok("Pessoa Deletada com Sucesso");
+        return BadRequest("Exclusão não realizada");
     }
 
     [HttpPut]
-    public async Task<ActionResult<Transaction>> UpdateTransaction(int id, [FromBody] Transaction transaction)
+    public async Task<ActionResult<Transaction>> UpdateTransaction(int id, Transaction transaction)
     {
         var result = await transactionAppService.Update(id, transaction);
+        if (result == null)
+            return NotFound("Não encontrado");
         return Ok(result);
     }
 }

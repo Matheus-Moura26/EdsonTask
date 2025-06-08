@@ -8,59 +8,56 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Persons;
 
-    [ApiController]
-    [Route("api/[controller]/[action]")]
-    public class PersonController(PersonAppService personAppService) : ControllerBase
+[ApiController]
+[Route("api/[controller]/[action]")]
+public class PersonController(PersonAppService personAppService) : ControllerBase
+{
+
+    [HttpGet]
+    public async Task<ActionResult<Person>> Get(int id)
     {
+        var person = await personAppService.Get(id);
 
-        [HttpGet]
-        public async Task<ActionResult<Person>> Get(int id)
-        {
-            var person = await personAppService.Get(id);
-
-            if (person == null)
-            {
-                return NoContent();
-            }
-            return Ok(person);
-        }
-
-
-        [HttpGet]
-        public async Task<ActionResult<List<Person>>> GetAll()
-        {
-        var people = await personAppService.GetAll();
-
-        if (people == null)
-        {
+        if (person == null)
             return NoContent();
-        }
+
+        return Ok(person);
+    }
+
+
+    [HttpGet]
+    public async Task<ActionResult<List<Person>>> GetAll()
+    {
+        var people = await personAppService.GetAll();
+        
+        if (people == null)
+        return NoContent();
+
         return Ok(people);
-        }
+    }
 
+
+    [HttpPost]
+    public async Task<ActionResult<Person>> Create(Person person)
+    {
+        var result = await personAppService.Create(person);
+        if (result == null)
+            return NotFound("Pessoa não encontrada");
+
+        return Ok(result);
+    }
         
-        [HttpPost]
-        public async Task<ActionResult<Person>> Create([FromBody] Person person)
-        {
-            var result = await personAppService.Create(person);
-
-            return CreatedAtAction(nameof(GetAll), new { id = person.PersonId }, person);
-        }
-
+    [HttpDelete]
+    public async Task<ActionResult<Person>> Delete(int id)
+    {
+        var person = await personAppService.Get(id);
         
-        [HttpDelete]
-        public async Task<ActionResult<Person>> Delete(int id)
-        {
-            var person = await personAppService.Get(id);
+        if (person == null)
+        return NotFound();
 
-            if (person == null)
-            {
-                return NotFound("Pessoa não encontrada");
-            }
-
-            personAppService.Delete(person.PersonId);
-            return Ok("Pessoa deletada com sucesso");
-        }
+        await personAppService.Delete(person.PersonId);
+        return Ok("Pessoa deletada com sucesso");
+    }
 
     [HttpPut]
     public async Task<ActionResult<Person>> Update(int id, [FromBody] Person person)
@@ -73,4 +70,4 @@ namespace Api.Controllers.Persons;
         await personAppService.Update(id, person);
         return Ok();
     }
-    }
+}

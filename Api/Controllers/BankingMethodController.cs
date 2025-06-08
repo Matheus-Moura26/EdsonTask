@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using FinanceManager.Domain.Entities;
 using FinanceManager.Application.AppService;
 using System.Threading.Tasks;
-using FinanceManager.Appilcation.AppService;
 
 
 namespace Api.Controllers.BankingMethods;

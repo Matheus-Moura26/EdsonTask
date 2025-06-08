@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FinanceManager.Domain.Entities;
 using FinanceManager.Repository.Repositories;
 
-namespace FinanceManager.Appilcation.AppService;
+namespace FinanceManager.Application.AppService;
 
 public class BankingMethodAppService(BankingMethodRepository bankingMethodRepository)
 {

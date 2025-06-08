@@ -1,9 +1,9 @@
 using FinanceManager.Domain.Entities;
-using Microsoft.EntityFrameWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Repository.Repositories;
 
-public class BankAccountRepository(DbContext context) : GenericRepository<BankAccount>(context)
+public class BankAccountRepository(MyDbContext context) : GenericRepository<BankAccount>(context)
 {
     
 }

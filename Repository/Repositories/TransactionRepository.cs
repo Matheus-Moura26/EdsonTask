@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Repository.Repositories;
 
-public class TransactionRepository(DbContext context) : GenericRepository<Transaction>(context)
+public class TransactionRepository(MyDbContext context) : GenericRepository<Transaction>(context)
 {
     
 }

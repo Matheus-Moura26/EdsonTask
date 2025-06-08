@@ -28,7 +28,7 @@ public class PersonAppService(PersonRepository personRepository)
         return person;
     }
 
-    public async Task<Person> Create(Person person)
+    public async Task<Person?> Create(Person person)
     {
         await personRepository.AddAsync(person);
         return await personRepository.GetByIdAsync(person.PersonId);

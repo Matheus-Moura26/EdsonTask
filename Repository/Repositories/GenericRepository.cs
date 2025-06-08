@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.Repository.Repositories
 {
-    public class GenericRepository<T>(DbContext context) where T : class
+    public class GenericRepository<T>(MyDbContext context) where T : class
     {
-        protected readonly DbContext _context = context;
+        protected readonly MyDbContext _context = context;
         protected readonly DbSet<T> _dbSet = context.Set<T>();
 
         public async Task<T?> GetByIdAsync(int id)
